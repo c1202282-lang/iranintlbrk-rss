@@ -2,8 +2,11 @@ name: Build and Publish RSS
 
 on:
   schedule:
-    - cron: "*/5 * * * *"
+    - cron: "*/5 * * * *"  # هر 5 دقیقه
   workflow_dispatch:
+
+permissions:
+  contents: write
 
 jobs:
   build:
@@ -14,28 +17,23 @@ jobs:
         uses: actions/checkout@v4
 
       - name: Set up Python
-        uses: actions/setup-python@v4
+        uses: actions/setup-python@v5
         with:
           python-version: "3.x"
 
       - name: Install dependencies
-        run: |
-          pip install -r requirements.txt
+        run: pip install -r requirements.txt
 
-      - name: Run crawler
-        run: |
-          python main.py
+      - name: Run main.py
+        run: python main.py
 
-      - name: Setup Git user
+      - name: Publish feed.xml to gh-pages
         run: |
           git config --global user.name "github-actions[bot]"
           git config --global user.email "github-actions[bot]@users.noreply.github.com"
-
-      - name: Push feed to gh-pages
-        run: |
-          git fetch origin
-          git checkout --orphan gh-pages
-          git reset
+          git fetch origin gh-pages || git checkout --orphan gh-pages
+          git checkout gh-pages || git checkout --orphan gh-pages
+          cp feed.xml ./feed.xml
           git add feed.xml
-          git commit -m "Update RSS feed"
-          git push --force https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }} gh-pages
+          git commit -m "Update RSS feed" || echo "No changes to commit"
+          git push origin gh-pages
