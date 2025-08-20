@@ -2,47 +2,40 @@ name: Build and Publish RSS
 
 on:
   schedule:
-    - cron: "*/5 * * * *" # Run every 5 minutes
-  workflow_dispatch: # Allow manual run
+    - cron: "*/5 * * * *"
+  workflow_dispatch:
 
 jobs:
   build:
     runs-on: ubuntu-latest
+
     steps:
-      # Step 1: Get the repository code
       - name: Checkout repository
         uses: actions/checkout@v4
 
-      # Step 2: Set up Python environment
       - name: Set up Python
         uses: actions/setup-python@v4
         with:
           python-version: "3.x"
 
-      # Step 3: Install Python dependencies
       - name: Install dependencies
         run: |
           pip install -r requirements.txt
 
-      # Step 4: Run your crawler script
-      - name: Run main.py
+      - name: Run crawler
         run: |
           python main.py
 
-      # Step 5: Configure Git identity for commit
       - name: Setup Git user
         run: |
           git config --global user.name "github-actions[bot]"
           git config --global user.email "github-actions[bot]@users.noreply.github.com"
 
-      # Step 6: Create/update gh-pages branch with feed.xml
-      - name: Deploy to gh-pages
+      - name: Push feed to gh-pages
         run: |
           git fetch origin
           git checkout --orphan gh-pages
           git reset
           git add feed.xml
           git commit -m "Update RSS feed"
-          git push -f origin gh-pages
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          git push --force https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }} gh-pages
