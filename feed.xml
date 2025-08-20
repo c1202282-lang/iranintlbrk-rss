@@ -1,20 +1,21 @@
-<?xml version="1.0" ?>
+<?xml version="1.0" encoding="UTF-8"?>
 <rss version="2.0">
-  <channel>
-    <title>IranIntlbrk RSS (Anti-Block)</title>
-    <link>https://x.com/IranIntlbrk</link>
-    <description>Latest tweets without VPN</description>
-    <item>
-      <title>404.That’s an error.The requested URL/search?q=sit...</title>
-      <link>https://webcache.googleusercontent.com/search?q=site:x.com/IranIntlbrk</link>
-      <description>404.That’s an error.The requested URL/search?q=site:x.com/IranIntlbrkwas not found on this server.That’s all we know.</description>
-      <pubDate>Wed, 20 Aug 2025 19:42:00 GMT</pubDate>
-    </item>
-    <item>
-      <title>The requested URL/search?q=site:x.com/IranIntlbrkw...</title>
-      <link>https://webcache.googleusercontent.com/search?q=site:x.com/IranIntlbrk</link>
-      <description>The requested URL/search?q=site:x.com/IranIntlbrkwas not found on this server.That’s all we know.</description>
-      <pubDate>Wed, 20 Aug 2025 19:42:00 GMT</pubDate>
-    </item>
-  </channel>
+<channel>
+<title>IranIntlbrk RSS (Anti-Block)</title>
+<link>https://x.com/IranIntlbrk</link>
+<description>Latest tweets without VPN</description>
+<item>
+<title>Test News 1</title>
+<link>https://example.com/1</link>
+<description>This is a test item for IranIntlbrk RSS.</description>
+<pubDate>Wed, 20 Aug 2025 20:39:25 GMT</pubDate>
+</item>
+<item>
+<title>Test News 2</title>
+<link>https://example.com/2</link>
+<description>Second test item for IranIntlbrk RSS.</description>
+<pubDate>Wed, 20 Aug 2025 20:39:25 GMT</pubDate>
+</item>
+
+</channel>
 </rss>
