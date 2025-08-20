@@ -1,4 +1,5 @@
 from datetime import datetime
+import os
 
 # آیتم‌های تستی
 items = [
@@ -39,8 +40,9 @@ rss_content += """
 </rss>
 """
 
-# ذخیره در فایل feed.xml
-with open("feed.xml", "w", encoding="utf-8") as f:
+# ساخت پوشه خروجی و ذخیره در آن
+os.makedirs("output", exist_ok=True)
+with open("output/feed.xml", "w", encoding="utf-8") as f:
     f.write(rss_content)
 
-print("feed.xml created successfully with test items.")
+print("feed.xml created successfully in /output with test items.")
